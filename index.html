@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FranciscoJAM Práctica 1</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">		
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css" rel="stylesheet" type="text/css">
+    
+    
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+		
+			<div class="col-md-8 col-md-offset-3">
+			<h1 id="title">FranciscoJAM Práctica 1</h1>
+			</div>
+			
+			<div class="col-md-8 col-md-offset-2">
+        <div id="chart">
+            <svg></svg>
+        </div>
+			</div>
+			</div>
+		</div>
+	</div>
+
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
+	<script>
+    historicalBarChart = [
+        {
+            key: "Cumulative Return",
+            values: [
+                {
+                    "label" : "A" ,
+                    "value" : 29.765957771107
+                } ,
+                {
+                    "label" : "B" ,
+                    "value" : 0
+                } ,
+                {
+                    "label" : "C" ,
+                    "value" : 32.807804682612
+                } ,
+                {
+                    "label" : "D" ,
+                    "value" : 196.45946739256
+                } ,
+                {
+                    "label" : "E" ,
+                    "value" : 0.19434030906893
+                } ,
+                {
+                    "label" : "F" ,
+                    "value" : 98.079782601442
+                } ,
+                {
+                    "label" : "G" ,
+                    "value" : 13.925743130903
+                } ,
+                {
+                    "label" : "H" ,
+                    "value" : 5.1387322875705
+                }
+            ]
+        }
+    ];
+    nv.addGraph(function() {
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .staggerLabels(true)
+            //.staggerLabels(historicalBarChart[0].values.length > 8)
+            .showValues(true)
+            .duration(250)
+            ;
+        d3.select('#chart svg')
+            .datum(historicalBarChart)
+            .call(chart);
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+	</script> 
+  
+  </body>
+</html>
